@@ -62,11 +62,9 @@
         <!-- Verify 100% Code Coverage -->
         <xmlproperty file="${reports.dir}/coverage.xml" collapseAttributes="true"/>
         <if>
-            <not>
-                <equals arg1="${snapshot.totalcount}" arg2="${snapshot.totalcovered}"/>
-            </not>
+            <equals arg1="${snapshot.totalcount}/${snapshot.totalcovered}*100" arg2="90"/>
             <then>
-                <fail msg="!${line.separator}${line.separator}Code Coverage needs to be increased 100% still:  file://${reports.dir}/index.html" />
+                <fail msg="!${line.separator}${line.separator}Code Coverage needs to be increased 90% still:  file://${reports.dir}/index.html" />
             </then>
         </if>
     </target>
