@@ -1,6 +1,8 @@
 {
-  "name": "chalbert/git",
+  "name": "chrishalbert/git",
+  "type": "library",
   "description": "A git wrapper.",
+  "license": "BSD3-clause",
   "keywords": ["git", "php"],
   "authors": [
     {
@@ -9,7 +11,7 @@
     }
   ],
   "require": {
-    "php": "5.6.*",
+    "php": "5.6.*"
   },
   "require-dev": {
     "phing/phing": "2.*",
