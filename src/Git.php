@@ -13,7 +13,7 @@ class Git
     public function __call($method, $args)
     {
         $command = Inflector::camelToChain($method);
-        return $this->execute($command, $args);
+        return $this->command($command, $args);
     }
 
     public function blame($file, $line)
@@ -28,7 +28,7 @@ class Git
      */
     private function command($command, $args)
     {
-        $command = sprintf('git %s %s', $command, Stringify::arguments($args));
+        $command = trim(sprintf('git %s %s', $command, Stringify::arguments($args)));
         list($output, $return) = $this->execute($command);
         if ($return != self::SUCCESS) {
             throw new InvalidCommandComposition();

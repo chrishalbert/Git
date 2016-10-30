@@ -2,6 +2,8 @@
 
 namespace ChrisHalbert\Git;
 
+use ChrisHalbert\Git\Exception\InvalidCommandComposition;
+
 class GitTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -24,5 +26,26 @@ class GitTest extends \PHPUnit_Framework_TestCase
             ->willReturn(['Worked', Git::SUCCESS]);
 
         $this->git->blame('example.file', 1);
+    }
+
+    public function testThrowsInvalidCommandComposition()
+    {
+        $this->setExpectedException(InvalidCommandComposition::class);
+        $failure = !Git::SUCCESS;
+        $this->git->expects($this->once())
+            ->method('execute')
+            ->with('git bad-command')
+            ->willReturn(['Worked', $failure]);
+
+        $this->git->badCommand();
+    }
+
+    public function testMagicMethodDiff()
+    {
+        $this->git->expects($this->once())
+            ->method('execute')
+            ->with('git diff');
+
+        $this->git->diff();
     }
 }
