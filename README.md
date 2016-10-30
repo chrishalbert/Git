@@ -1,5 +1,4 @@
-#
-Git
+# Git
 
 ## Overview
 This is a simple git wrapper created for use in other php libraries.
