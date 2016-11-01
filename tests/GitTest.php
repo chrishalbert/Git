@@ -2,6 +2,7 @@
 
 namespace ChrisHalbert\Git;
 
+use ChrisHalbert\Git\Exception\InvalidArgument;
 use ChrisHalbert\Git\Exception\InvalidCommandComposition;
 
 class GitTest extends \PHPUnit_Framework_TestCase
@@ -25,7 +26,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
             ->with('git blame -L1,1 --line-porcelain -- example.file')
             ->willReturn(['Worked', Git::SUCCESS]);
 
-        $this->git->blame('example.file', 1);
+        $this->git->blameBus('example.file', 1);
     }
 
     public function testThrowsInvalidCommandComposition()
@@ -47,5 +48,22 @@ class GitTest extends \PHPUnit_Framework_TestCase
             ->with('git diff');
 
         $this->git->diff();
+    }
+
+    public function testInvalidArgumentThrownWithTooManyArgs()
+    {
+        $this->setExpectedException(InvalidArgument::class);
+        $this->git->checkout('-b', 'branch', 'remote/branch');
+    }
+
+    public function testReadmeExample()
+    {
+        $this->git->expects($this->exactly(2))
+            ->method('execute')
+            ->with('git blame -L=20,20 example.php')
+            ->willReturn('Success!');
+        $diff1 = $this->git->blame('-L=20,20 example.php');
+        $diff2 = $this->git->blame(['-L' => '20,20', 'example.php' => null]);
+        $this->assertEquals($diff1, $diff2);
     }
 }
