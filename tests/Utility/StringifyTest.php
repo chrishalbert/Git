@@ -2,7 +2,7 @@
 
 namespace ChrisHalbert\Git\Utility;
 
-use ChrisHalbert\Git\Exception\InvalidArgument;
+use ChrisHalbert\Git\Exception\InvalidArgumentException;
 
 class StringifyTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,7 +30,7 @@ class StringifyTest extends \PHPUnit_Framework_TestCase
 
     public function testArgumentsThrowsInvalidArgument()
     {
-        $this->setExpectedException(InvalidArgument::class, 'Invalid argument.', 400);
+        $this->setExpectedException(InvalidArgumentException::class, 'Invalid argument.', 400);
         Stringify::arguments((object)[]);
     }
 }

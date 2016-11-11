@@ -2,8 +2,8 @@
 
 namespace ChrisHalbert\Git;
 
-use ChrisHalbert\Git\Exception\InvalidArgument;
-use ChrisHalbert\Git\Exception\InvalidCommandComposition;
+use ChrisHalbert\Git\Exception\CommandFailureException;
+use ChrisHalbert\Git\Exception\InvalidArgumentException;
 
 class GitTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,7 +31,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsInvalidCommandComposition()
     {
-        $this->setExpectedException(InvalidCommandComposition::class);
+        $this->setExpectedException(CommandFailureException::class);
         $failure = !Git::SUCCESS;
         $this->git->expects($this->once())
             ->method('execute')
@@ -52,7 +52,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidArgumentThrownWithTooManyArgs()
     {
-        $this->setExpectedException(InvalidArgument::class);
+        $this->setExpectedException(InvalidArgumentException::class);
         $this->git->checkout('-b', 'branch', 'remote/branch');
     }
 
