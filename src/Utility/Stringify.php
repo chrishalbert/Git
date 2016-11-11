@@ -2,15 +2,19 @@
 
 namespace ChrisHalbert\Git\Utility;
 
-use ChrisHalbert\Git\Exception\InvalidArgument;
+use ChrisHalbert\Git\Exception\InvalidArgumentException;
 
+/**
+ * Class Stringify
+ * @package ChrisHalbert\Git\Utility
+ */
 class Stringify
 {
     /**
      * Converts an array of options/flags into a string.
      * @param array|string $args A string of a raw command or an assoc array of key value options.
      * @return string A raw command.
-     * @throws InvalidArgument If $args is not a string or array.
+     * @throws InvalidArgumentException If $args is not a string or array.
      */
     public static function arguments($args)
     {
@@ -23,7 +27,7 @@ class Stringify
 
         // If its not an array, Houston, we have a problem
         if (!is_array($args)) {
-            throw new InvalidArgument();
+            throw new InvalidArgumentException();
         }
 
         // Build the argument list
