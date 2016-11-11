@@ -2,6 +2,10 @@
 
 namespace ChrisHalbert\Git\Exception;
 
+/**
+ * Interface ExceptionInterface
+ * @package ChrisHalbert\Git\Exception
+ */
 interface ExceptionInterface
 {
     /**
@@ -12,7 +16,7 @@ interface ExceptionInterface
 
     /**
      * Returns the exception code.
-     * @return int
+     * @return integer
      */
     public function getCode();
 }
