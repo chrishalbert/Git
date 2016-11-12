@@ -33,7 +33,7 @@ class Git
 
         // Only one parameter should be passed to magic methods.
         if (sizeof($args) > 0) {
-            throw new InvalidArgumentException('Magic methods requires no more than 1 argument.');
+            throw new InvalidArgumentException('Magic methods require no more than 1 argument.');
         }
 
         if ($gitArgs === null) {
@@ -61,7 +61,7 @@ class Git
      * Returns output from a command.
      * @param string       $command A git command.
      * @param string|array $args    An array or string of arguments.
-     * @return string The response if any from the git command.
+     * @return mixed The response if any from the git command.
      * @throws CommandFailureException If the command failed.
      */
     protected function command($command, $args)
@@ -70,6 +70,10 @@ class Git
         list($output, $return) = $this->execute($command);
         if ($return != self::SUCCESS) {
             throw new CommandFailureException($output);
+        }
+
+        if (is_array($output)) {
+            return array_map('trim', $output);
         }
 
         return trim($output);

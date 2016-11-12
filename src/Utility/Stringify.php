@@ -34,7 +34,7 @@ class Stringify
         foreach ($args as $arg => $val) {
             $argList .= ' ' . $arg;
             if (!empty($val)) {
-                $argList .= '=' . $val;
+                $argList .= ' ' . $val;
             }
         }
 
