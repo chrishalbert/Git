@@ -22,7 +22,7 @@ Add this to your composer file:
 
 Or simply on the command line:
 ```
-composer require chrishalbert\git
+composer require chrishalbert/git
 ```
 
 
