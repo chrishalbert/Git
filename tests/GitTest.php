@@ -60,10 +60,20 @@ class GitTest extends \PHPUnit_Framework_TestCase
     {
         $this->git->expects($this->exactly(2))
             ->method('execute')
-            ->with('git blame -L=20,20 example.php')
+            ->with('git blame -L 20,20 example.php')
             ->willReturn('Success!');
-        $diff1 = $this->git->blame('-L=20,20 example.php');
+        $diff1 = $this->git->blame('-L 20,20 example.php');
         $diff2 = $this->git->blame(['-L' => '20,20', 'example.php' => null]);
         $this->assertEquals($diff1, $diff2);
+    }
+
+    public function testCommandTrimsArrayElements()
+    {
+        $this->git->expects($this->once())
+            ->method('execute')
+            ->with('git branch')
+            ->willReturn([['* master', '  bugFix'], 0]);
+        $expected = ['* master', 'bugFix'];
+        $this->assertEquals($expected, $this->git->branch());
     }
 }

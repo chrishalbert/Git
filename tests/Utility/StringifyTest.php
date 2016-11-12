@@ -18,12 +18,12 @@ class StringifyTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                "--arg=123 -A=1 -- argument",
-                "--arg=123 -A=1 -- argument"
+                "--arg 123 -A 1 -- argument",
+                "--arg 123 -A 1 -- argument"
             ],
             [
                 ["--arg" => 123, "-A" => 1, "--" => null, "argument" => ''],
-                "--arg=123 -A=1 -- argument"
+                "--arg 123 -A 1 -- argument"
             ]
         ];
     }

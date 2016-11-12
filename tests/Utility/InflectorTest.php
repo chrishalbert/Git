@@ -2,6 +2,8 @@
 
 namespace ChrisHalbert\Git\Utility;
 
+use ChrisHalbert\Git\Exception\InvalidArgumentException;
+
 class InflectorTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -34,5 +36,11 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
             ['branch', 'branch'],
             ['cherryPick', 'cherry-pick']
         ];
+    }
+
+    public function testVerifyStringThrowsError()
+    {
+        $this->setExpectedException(InvalidArgumentException::class);
+        Inflector::chainToCamel([]);
     }
 }
