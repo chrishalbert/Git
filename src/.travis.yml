@@ -6,8 +6,7 @@ php:
   - 5.6
   - 7.0
 
-script: ./vendor/bin/phing
+script: ./vendor/bin/phpunit -c phpunit.xml
 
 notifications:
   email: false
-  
